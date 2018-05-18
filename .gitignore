@@ -65,3 +65,5 @@ gen-external-apklibs
 # *.iml
 # modules.xml
 # *.ipr
+
+.DS_Store
