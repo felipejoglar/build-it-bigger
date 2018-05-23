@@ -16,14 +16,31 @@
 
 package com.fjoglar.jokescreen;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class JokeActivity extends AppCompatActivity {
+
+    @NonNull
+    public static final String EXTRA_JOKE = "joke";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_joke);
+
+        TextView textViewJoke = findViewById(R.id.textview_joke);
+
+        Intent intent = getIntent();
+        String joke = intent.getStringExtra(EXTRA_JOKE);
+
+        if (joke == null || joke.isEmpty()) {
+            textViewJoke.setText(R.string.error);
+        } else {
+            textViewJoke.setText(joke);
+        }
     }
 }
