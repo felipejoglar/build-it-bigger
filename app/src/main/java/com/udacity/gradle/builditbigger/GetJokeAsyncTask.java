@@ -26,14 +26,14 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class GetJokeAsyncTask extends AsyncTask<com.udacity.gradle.builditbigger.MainActivityFragment, Void, String> {
+public class GetJokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
 
     private static MyApi mMyApiService = null;
-    private com.udacity.gradle.builditbigger.MainActivityFragment mMainActivityFragment;
+    private MainActivityFragment mMainActivityFragment;
 
 
     @Override
-    protected String doInBackground(com.udacity.gradle.builditbigger.MainActivityFragment... params) {
+    protected String doInBackground(MainActivityFragment... params) {
 
         mMainActivityFragment = params[0];
 
@@ -63,6 +63,6 @@ public class GetJokeAsyncTask extends AsyncTask<com.udacity.gradle.builditbigger
 
     @Override
     protected void onPostExecute(String result) {
-        mMainActivityFragment.startJokeScreen(result);
+        mMainActivityFragment.onJokeRetrieved(result);
     }
 }
