@@ -35,6 +35,19 @@ android {
     buildTypes.each {
         it.buildConfigField 'String', 'ADMOB_APP_ID', admobAppId
     }
+
+    flavorDimensions "all"
+
+    productFlavors {
+        free {
+            dimension "all"
+            applicationIdSuffix ".free"
+        }
+
+        paid {
+            dimension "all"
+        }
+    }
 }
 
 dependencies {
