@@ -50,9 +50,7 @@ public class MainActivityFragment extends Fragment {
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdClosed() {
-                if (!mIsTesting) {
-                    startJokeScreen();
-                }
+                startJokeScreen();
             }
         });
 
@@ -77,10 +75,12 @@ public class MainActivityFragment extends Fragment {
 
     public void onJokeRetrieved(String joke) {
         mJoke = joke;
-        if (mInterstitialAd.isLoaded()) {
-            mInterstitialAd.show();
-        } else {
-            Log.d("TAG", "The interstitial wasn't loaded yet.");
+        if (!mIsTesting) {
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            } else {
+                Log.d("TAG", "The interstitial wasn't loaded yet.");
+            }
         }
     }
 
