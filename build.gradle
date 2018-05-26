@@ -20,3 +20,10 @@ allprojects {
         google()
     }
 }
+
+//This task starts the the app engine, runs the test for the Async Task, and then
+// stops the app engine server.
+task startAppengineAndTest(dependsOn: 'backend:appengineStart') {
+    finalizedBy(tasks.getByPath('app:connectedAndroidTest')
+            .finalizedBy(tasks.getByPath('backend:appengineStop')));
+}
