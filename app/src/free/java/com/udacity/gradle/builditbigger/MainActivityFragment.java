@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.fjoglar.jokescreen.JokeActivity;
 import com.google.android.gms.ads.AdListener;
@@ -32,6 +33,8 @@ public class MainActivityFragment extends Fragment {
 
     @BindView(R.id.adView)
     AdView mAdView;
+    @BindView(R.id.progressbar_loading)
+    ProgressBar mProgressLoading;
 
     public MainActivityFragment() {
     }
@@ -70,6 +73,7 @@ public class MainActivityFragment extends Fragment {
 
     @OnClick(R.id.button_main_get_joke)
     public void tellJoke() {
+        showLoading();
         new GetJokeAsyncTask().execute(this);
     }
 
@@ -89,6 +93,14 @@ public class MainActivityFragment extends Fragment {
         jokeIntent.putExtra(JokeActivity.EXTRA_JOKE, mJoke);
 
         startActivity(jokeIntent);
+    }
+
+    public void showLoading() {
+        mProgressLoading.setVisibility(View.VISIBLE);
+    }
+
+    public void hideLoading() {
+        mProgressLoading.setVisibility(View.GONE);
     }
 
     @VisibleForTesting

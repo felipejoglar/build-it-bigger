@@ -63,6 +63,7 @@ public class GetJokeAsyncTask extends AsyncTask<MainActivityFragment, Void, Stri
 
     @Override
     protected void onPostExecute(String result) {
+        mMainActivityFragment.hideLoading();
         mMainActivityFragment.onJokeRetrieved(result);
     }
 }
