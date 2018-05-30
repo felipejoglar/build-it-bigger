@@ -30,10 +30,16 @@ public class GetJokeAsyncTaskTest {
 
     @Test
     public void asyncTaskDoesNotReturnNullOrEmptyString() throws Exception {
-        MainActivityFragment mainActivityFragment = new MainActivityFragment();
+        final MainActivityFragment mainActivityFragment = new MainActivityFragment();
         mainActivityFragment.setTesting();
 
-        new GetJokeAsyncTask().execute(mainActivityFragment);
+        GetJokeAsyncTask getJokeAsyncTask = new GetJokeAsyncTask(new GetJokeAsyncTask.OnEventListener<String>() {
+            @Override
+            public void onSuccess(String joke) {
+                mainActivityFragment.setJoke(joke);
+            }
+        });
+        getJokeAsyncTask.execute();
         Thread.sleep(5000);
 
         assertThat(mainActivityFragment.getJoke(), not(isEmptyString()));

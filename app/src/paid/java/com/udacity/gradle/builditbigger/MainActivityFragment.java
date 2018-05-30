@@ -1,6 +1,5 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
@@ -52,10 +51,17 @@ public class MainActivityFragment extends Fragment {
     @OnClick(R.id.button_main_get_joke)
     public void tellJoke() {
         showLoading();
-        new GetJokeAsyncTask().execute(this);
+        GetJokeAsyncTask getJokeAsyncTask = new GetJokeAsyncTask(new GetJokeAsyncTask.OnEventListener<String>() {
+            @Override
+            public void onSuccess(String joke) {
+                hideLoading();
+                onJokeRetrieved(joke);
+            }
+        });
+        getJokeAsyncTask.execute();
     }
 
-    public void onJokeRetrieved(String joke) {
+    private void onJokeRetrieved(String joke) {
         mJoke = joke;
         if (!mIsTesting) {
             startJokeScreen();
@@ -66,17 +72,22 @@ public class MainActivityFragment extends Fragment {
         startActivity(JokeActivity.jokeScreeenIntent(getActivity(), mJoke));
     }
 
-    public void showLoading() {
+    private void showLoading() {
         mProgressLoading.setVisibility(View.VISIBLE);
     }
 
-    public void hideLoading() {
+    private void hideLoading() {
         mProgressLoading.setVisibility(View.GONE);
     }
 
     @VisibleForTesting
     public String getJoke() {
         return mJoke;
+    }
+
+    @VisibleForTesting
+    public void setJoke(String joke) {
+        mJoke = joke;
     }
 
     @VisibleForTesting

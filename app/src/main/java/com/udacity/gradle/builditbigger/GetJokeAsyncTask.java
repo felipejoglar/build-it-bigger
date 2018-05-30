@@ -26,18 +26,20 @@ import com.udacity.gradle.builditbigger.backend.myApi.MyApi;
 
 import java.io.IOException;
 
-public class GetJokeAsyncTask extends AsyncTask<MainActivityFragment, Void, String> {
+public class GetJokeAsyncTask extends AsyncTask<Void, Void, String> {
 
     private static MyApi mMyApiService = null;
-    private MainActivityFragment mMainActivityFragment;
 
+    private OnEventListener<String> mCallBack;
+
+    public GetJokeAsyncTask(OnEventListener callback) {
+        mCallBack = callback;
+    }
 
     @Override
-    protected String doInBackground(MainActivityFragment... params) {
+    protected String doInBackground(Void... params) {
 
-        mMainActivityFragment = params[0];
-
-        if(mMyApiService == null) {
+        if (mMyApiService == null) {
             MyApi.Builder builder = new
                     MyApi.Builder(AndroidHttp.newCompatibleTransport(),
                     new AndroidJsonFactory(), null)
@@ -63,7 +65,14 @@ public class GetJokeAsyncTask extends AsyncTask<MainActivityFragment, Void, Stri
 
     @Override
     protected void onPostExecute(String result) {
-        mMainActivityFragment.hideLoading();
-        mMainActivityFragment.onJokeRetrieved(result);
+        if (mCallBack != null) {
+            mCallBack.onSuccess(result);
+        }
     }
+
+    public interface OnEventListener<T> {
+        void onSuccess(T object);
+    }
+
+
 }
