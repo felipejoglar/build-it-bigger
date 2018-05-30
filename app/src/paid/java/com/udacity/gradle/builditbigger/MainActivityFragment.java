@@ -14,6 +14,7 @@ import com.fjoglar.jokescreen.JokeActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -23,6 +24,8 @@ public class MainActivityFragment extends Fragment {
 
     private boolean mIsTesting = false;
     private String mJoke;
+
+    private Unbinder mUnbinder;
 
     @BindView(R.id.progressbar_loading)
     ProgressBar mProgressLoading;
@@ -35,9 +38,15 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-        ButterKnife.bind(this, root);
+        mUnbinder = ButterKnife.bind(this, root);
 
         return root;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.button_main_get_joke)

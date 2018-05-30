@@ -20,6 +20,7 @@ import com.google.android.gms.ads.MobileAds;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
@@ -30,6 +31,8 @@ public class MainActivityFragment extends Fragment {
     private boolean mIsTesting = false;
     private String mJoke;
     private InterstitialAd mInterstitialAd;
+
+    private Unbinder mUnbinder;
 
     @BindView(R.id.adView)
     AdView mAdView;
@@ -46,7 +49,7 @@ public class MainActivityFragment extends Fragment {
 
         MobileAds.initialize(getActivity(), BuildConfig.ADMOB_APP_ID);
 
-        ButterKnife.bind(this, root);
+        mUnbinder = ButterKnife.bind(this, root);
 
         mInterstitialAd = new InterstitialAd(getActivity());
         mInterstitialAd.setAdUnitId(getString(R.string.intersticial_ad_unit_id));
@@ -69,6 +72,12 @@ public class MainActivityFragment extends Fragment {
 
         mInterstitialAd.loadAd(adRequest);
         mAdView.loadAd(adRequest);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mUnbinder.unbind();
     }
 
     @OnClick(R.id.button_main_get_joke)
