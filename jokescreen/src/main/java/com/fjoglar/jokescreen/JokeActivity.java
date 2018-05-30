@@ -16,6 +16,7 @@
 
 package com.fjoglar.jokescreen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +28,7 @@ import android.widget.TextView;
 public class JokeActivity extends AppCompatActivity {
 
     @NonNull
-    public static final String EXTRA_JOKE = "joke";
+    private static final String EXTRA_JOKE = "joke";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,4 +61,11 @@ public class JokeActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public static Intent jokeScreeenIntent(Context context, String joke) {
+        Intent intent = new Intent(context, JokeActivity.class);
+        intent.putExtra(EXTRA_JOKE, joke);
+        return intent;
+    }
+
 }
