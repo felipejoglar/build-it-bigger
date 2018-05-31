@@ -69,7 +69,7 @@ public class MainActivityFragment extends Fragment {
     }
 
     private void startJokeScreen() {
-        startActivity(JokeActivity.jokeScreeenIntent(getActivity(), mJoke));
+        startActivity(JokeActivity.jokeScreenIntent(getActivity(), mJoke));
     }
 
     private void showLoading() {

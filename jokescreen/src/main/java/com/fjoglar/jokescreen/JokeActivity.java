@@ -62,7 +62,7 @@ public class JokeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public static Intent jokeScreeenIntent(Context context, String joke) {
+    public static Intent jokeScreenIntent(Context context, String joke) {
         Intent intent = new Intent(context, JokeActivity.class);
         intent.putExtra(EXTRA_JOKE, joke);
         return intent;
