@@ -6,7 +6,9 @@
 
 This project contains an app with multiple flavors that uses multiple libraries and Google Cloud Endpoints. The finished app consists of four modules:
 
-<img src="https://github.com/fjoglar/build-it-bigger/blob/master/assets/scheme.png" width="400" align="right" hspace="10">
+<p align="center">
+<img src="https://github.com/fjoglar/build-it-bigger/blob/master/assets/scheme.png" width="500" style="width: 10px;"/>
+</p>
 
 - A Java library that provides jokes.
 - Google Cloud Endpoints (GCE) project that serves those jokes.
@@ -52,7 +54,6 @@ admobAppId = "your_admob_app_id"
 * [Android SDK](https://developer.android.com/studio/index.html)
 * Android O ([API 27](https://developer.android.com/preview/api-overview.html))
 * Latest Android SDK Tools and build tools.
-
 
 ## License
 
